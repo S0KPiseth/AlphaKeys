@@ -29,7 +29,6 @@ h1 {
   justify-content: space-between;
   margin-top: 20px;
   min-height: 0% !important;
-  height: 20px;
 }
 .hight-30 {
   min-height: 0px !important;
@@ -43,9 +42,7 @@ h1 {
   display: flex;
 }
 .labelRadio {
-  align-self: center;
-  box-sizing: border-box;
-  height: 30px;
+  padding: 5px;
   float: left;
   clear: none;
   display: block;
@@ -54,7 +51,7 @@ h1 {
   padding-right: 15px;
   border-radius: 15px;
   border: 0;
-  background-color: white;
+  background-color: transparent;
 }
 .radio-bg {
   background-color: #d9eafd;

@@ -9,6 +9,9 @@
   background-color: white;
 }
 .newbutton {
+  box-shadow: 0 0 5px rgba(137, 43, 226, 0.287);
+  border: 0;
+  color: white;
   background-color: blueviolet;
   animation: buttonclick 0.15s;
 }
