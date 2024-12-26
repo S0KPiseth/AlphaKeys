@@ -1,4 +1,4 @@
-.firstbutton {
+.firstButton {
   font-family: "Roboto Mono", serif;
   margin-bottom: 10px;
   margin-left: 10px;
@@ -8,17 +8,17 @@
   border-radius: 10px;
   background-color: white;
 }
-.newbutton {
+.newButton {
   box-shadow: 0 0 5px rgba(137, 43, 226, 0.287);
   border: 0;
   color: white;
   background-color: blueviolet;
-  animation: buttonclick 0.15s;
+  animation: buttonClick 0.15s;
 }
 .keyboard {
   text-align: center;
 }
-@keyframes buttonclick {
+@keyframes buttonClick {
   from {
     opacity: 0;
   }

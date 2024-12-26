@@ -1,12 +1,15 @@
 import Button from "./Button/Button.jsx";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function App() {
+  //initialize state value
+  console.log("component Re-render");
   const [words, setWords] = useState("25");
-  const [arrayword, setArrayWord] = useState([]);
-  const [wpm, setWpm] = useState(0);
-  let [loading, setLoading] = useState(false);
+  const [word2Type, setWord2Type] = useState("");
+  const wpm = useRef(0);
+  const [loading, setLoading] = useState(false);
 
+  //set number of word and apply background to radio label when click
   function handleRadio(e) {
     setWords(e.target.value);
     document.querySelector("#typeInput").focus();
@@ -14,7 +17,7 @@ function App() {
     radios.forEach((element) => (element.className = "labelRadio"));
     e.target.parentElement.className += " radio-bg";
   }
-
+  //fetch random words from api
   useEffect(() => {
     let mounted = true;
     setLoading(true);
@@ -24,7 +27,8 @@ function App() {
         const response = await fetch(`https://random-word-api.herokuapp.com/word?number=${words}`);
         const data = await response.json();
         if (mounted) {
-          setArrayWord(data);
+          // set value to type
+          setWord2Type(data.join(" "));
         }
         setLoading(false);
       } catch (error) {
@@ -62,12 +66,12 @@ function App() {
               150
             </label>
           </div>
-          <p>WPM: {wpm}</p>
+          <p>WPM: {wpm.current}</p>
         </div>
       </div>
 
       <div className="container">
-        <Button word={arrayword} wpm={setWpm} setword={setWords} loading={loading} setLoading={setLoading} />
+        <Button words={words} wpm={wpm} setWord={setWords} loading={loading} word2Type={word2Type} />
       </div>
     </>
   );
