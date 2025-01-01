@@ -14,6 +14,14 @@
 }
 .keyboard {
   text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 @keyframes buttonclick {
   from {
@@ -47,6 +55,7 @@
   font-size: 30px;
   border: 0;
   caret-shape: block;
+  position: relative;
 }
 .textToType:focus {
   outline: none;
@@ -57,4 +66,42 @@
 .textForType:disabled {
   background-color: transparent;
   color: hsl(0, 1%, 62%);
+}
+
+@media (max-width: 768px) {
+  .textToType {
+    width: 90%;
+    font-size: 20px;
+    height: 40px;
+  }
+  
+  .firstbutton {
+    margin-left: 5px;
+    width: 40px;
+    height: 35px;
+    font-size: 12px;
+  }
+  
+  .mediumBtn {
+    width: 90px;
+  }
+  
+  .enterBtn {
+    width: 85px;
+  }
+  
+  .shiftBtn {
+    width: 100px;
+  }
+  
+  .spaceBtn {
+    width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .textToType {
+    font-size: 16px;
+    height: 35px;
+  }
 }

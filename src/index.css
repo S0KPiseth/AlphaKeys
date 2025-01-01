@@ -1,101 +1,121 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
+
 html,
 body,
-#root,
-.container {
+#root {
   font-family: "JetBrains Mono", serif;
-  min-height: 100% !important;
-  height: 100%;
+  min-height: 100vh;
 }
+
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 
 h1 {
   margin-top: 40px;
   text-align: center;
-  font-optical-sizing: auto;
   font-weight: bold;
-  font-style: normal;
 }
+
 .Panel {
-  width: 920px;
+  width: 100%;
+  max-width: 920px;
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  min-height: 0% !important;
-  height: 20px;
-}
-.hight-30 {
-  min-height: 0px !important;
+  margin: 20px auto;
+  padding: 0 15px;
   height: 30px;
 }
+
 .Radio {
   scale: 1.2;
   margin-right: 5px;
 }
+
 .wordContContainer {
   display: flex;
+  gap: 5px;
 }
+
 .labelRadio {
   align-self: center;
-  box-sizing: border-box;
   height: 30px;
-  float: left;
-  clear: none;
-  display: block;
-  margin-right: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 0 15px;
   border-radius: 15px;
-  border: 0;
   background-color: white;
+  display: flex;
+  align-items: center;
 }
+
 .radio-bg {
   background-color: #d9eafd;
 }
-@media (max-width: 938px) {
-  .visible-lg {
-    scale: 0;
-    /* visibility: hidden; */
-  }
-  .scale-down {
-    scale: 0.5;
-  }
-  .typingspce {
-    position: absolute;
-    top: 30%;
-    left: 0;
-    right: 0;
-    margin-inline: auto;
-    width: fit-content;
-  }
-  .hight-30 {
-    font-size: 3vw;
-  }
-  .labelRadio {
+
+@media (max-width: 768px) {
+  .Panel {
+    flex-direction: column;
     align-items: center;
-    display: flex;
-    margin: 0;
-    padding-left: 10px;
-    padding-right: 10px;
+    height: auto;
+    gap: 15px;
   }
-  .hight-30 {
-    top: 5%;
-    position: relative;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+
+  .wordContContainer {
+    flex-wrap: wrap;
+    justify-content: center;
   }
+
+  .labelRadio {
+    padding: 0 10px;
+    font-size: 14px;
+  }
+
   h1 {
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-    text-align: center;
+    font-size: 24px;
+    margin: 20px 15px;
+  }
+
+  .typing-container {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Panel {
+    padding: 0 10px;
+  }
+
+  .labelRadio {
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  .Radio {
+    scale: 1;
+  }
+
+  h1 {
+    font-size: 20px;
+    margin: 15px 10px;
+  }
+
+  .typing-container {
+    padding: 0 10px;
+  }
+}
+
+@media (max-height: 600px) {
+  h1 {
+    margin-top: 20px;
+  }
+  
+  .Panel {
+    margin: 10px auto;
   }
 }
