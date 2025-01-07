@@ -11,11 +11,18 @@ const KEYBOARD_LAYOUT = [
 
 const renderKey = (element, specialClass = '') => {
     const baseClass = `${style.firstbutton} ${specialClass}`.trim();
+    let keyId = element.toLowerCase();
+    
+    // Handle special left keys
+    if (element.startsWith('L')) {
+        keyId = `l${element.substring(1).toLowerCase()}`; // lshift, lalt, lctrl
+    }
+    
     return (
         <button
             key={element}
             className={baseClass}
-            id={element.toLowerCase()}
+            id={keyId}
         >
             {element}
         </button>

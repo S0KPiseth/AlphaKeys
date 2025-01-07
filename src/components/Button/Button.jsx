@@ -32,18 +32,23 @@ function Button({ word, wpm, setword, loading }) {
   const getSanitizedKey = (key) => {
     let sanitized = key.replace(/([.*+?^=${}()`|[\]/\\-])/g, '\\$1');
     if (key === SPECIAL_KEYS.SPACE) return 'Space';
-    if (key === SPECIAL_KEYS.CONTROL) return 'Ctrl';
+    if (key === SPECIAL_KEYS.CONTROL) return 'ctrl';
+    if (key === 'Shift') return 'shift';
+    if (key === 'Alt') return 'alt';
     return sanitized;
   };
 
   const updateKeyboardVisuals = (key) => {
-    const isSpecialKey = ["Ctrl", "Shift", "Alt"].includes(key);
+    const isSpecialKey = ["ctrl", "shift", "alt"].includes(key.toLowerCase());
     const target = document.querySelector(`#${key.toLowerCase()}`);
     
     if (isSpecialKey) {
-      const leftKey = document.querySelector(`#L${key.toLowerCase()}`);
-      applyKeyPressEffect(target, leftKey);
-    } else {
+      const leftKey = document.querySelector(`#l${key.toLowerCase()}`);
+      if (leftKey) {
+        applyKeyPressEffect(leftKey);
+      }
+    }
+    if (target) {
       applyKeyPressEffect(target);
     }
   };
