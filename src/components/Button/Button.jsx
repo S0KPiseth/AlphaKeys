@@ -56,20 +56,21 @@ function Button({ word, wpm, setword, loading }) {
   const applyKeyPressEffect = (target, paired = null) => {
     if (!target) return;
     
-    const removeAllEffects = () => {
-      document.querySelectorAll(`.${style.firstbutton}`).forEach(btn => {
-        btn.classList.remove(style.newbutton);
-      });
-    };
-
     const addEffect = () => {
-      removeAllEffects();
       target.classList.add(style.newbutton);
       if (paired) paired.classList.add(style.newbutton);
     };
 
-    addEffect();
-    setTimeout(() => target.classList.remove(style.newbutton), 150);
+    // Remove class if it exists to restart animation
+    if (target.classList.contains(style.newbutton)) {
+      target.classList.remove(style.newbutton);
+      if (paired) {
+        paired.classList.remove(style.newbutton);
+      }
+    }
+
+    // Add the effect after a short delay
+    setTimeout(() => addEffect(), 50);
   };
 
   const handleTyping = (key, target, event) => {

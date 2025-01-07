@@ -7,9 +7,13 @@
   border: 2px black solid;
   border-radius: 10px;
   background-color: white;
+  transition: background-color 0.15s ease;
 }
 .newbutton {
-  background-color: blueviolet;
+  background-color: blueviolet !important;
+  color: white;
+  box-shadow: 0 0 5px rgba(137, 43, 226, 0.287);
+  border: 0;
   animation: buttonclick 0.15s;
 }
 .keyboard {
