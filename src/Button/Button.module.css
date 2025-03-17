@@ -3,9 +3,10 @@
   margin-bottom: 10px;
   margin-left: 10px;
   width: 50px;
-  height: 40px;
-  border: 2px black solid;
-  border-radius: 10px;
+  height: 45px;
+  border: 0;
+  border: 0.1px rgba(0, 0, 0, 0.473) solid;
+  border-radius: 1000px;
   background-color: white;
 }
 .newButton {
@@ -13,20 +14,37 @@
   border: 0;
   color: white;
   background-color: blueviolet;
-  animation: buttonClick 0.15s;
+  animation: buttonClick 1s;
 }
 .keyboard {
   text-align: center;
 }
+@keyframes size {
+  from {
+    scale: 1;
+    color: black;
+    background-color: white;
+  }
+  to {
+    color: white;
+    background-color: blueviolet;
+    border: 0;
+    scale: 1.1;
+  }
+}
+
 @keyframes buttonClick {
   from {
     opacity: 0;
+    background-color: white;
   }
   to {
     opacity: 0.5;
+    background-color: rgb(153, 76, 224);
   }
   to {
     opacity: 1;
+    background-color: blueviolet;
   }
 }
 .mediumBtn {
@@ -40,24 +58,4 @@
 }
 .spaceBtn {
   width: 250px;
-}
-.textToType {
-  text-align: right;
-  font-family: "Roboto Mono", serif;
-  font-weight: bold;
-  width: 50%;
-  height: 50px;
-  font-size: 30px;
-  border: 0;
-  caret-shape: block;
-}
-.textToType:focus {
-  outline: none;
-}
-.textForType {
-  text-align: left;
-}
-.textForType:disabled {
-  background-color: transparent;
-  color: hsl(0, 1%, 62%);
 }

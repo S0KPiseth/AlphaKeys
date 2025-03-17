@@ -1,18 +1,20 @@
 import Button from "./Button/Button.jsx";
 import { useEffect, useState, useRef } from "react";
+import TypingIndicator from "./TypingIndicator.jsx";
+import Alert from "./Alert.jsx";
 
 function App() {
   //initialize state value
-  console.log("component Re-render");
   const [words, setWords] = useState("25");
   const [word2Type, setWord2Type] = useState("");
-  const wpm = useRef(0);
-  const [loading, setLoading] = useState(false);
+  const [wpm, setWpm] = useState(0);
+  const [isFetching, setIsFetching] = useState(false);
+  const [isFinish, setIsFinish] = useState(false);
+  const [resetRef, setResetRef] = useState(false);
 
   //set number of word and apply background to radio label when click
   function handleRadio(e) {
     setWords(e.target.value);
-    document.querySelector("#typeInput").focus();
     const radios = document.querySelectorAll(".labelRadio");
     radios.forEach((element) => (element.className = "labelRadio"));
     e.target.parentElement.className += " radio-bg";
@@ -20,17 +22,19 @@ function App() {
   //fetch random words from api
   useEffect(() => {
     let mounted = true;
-    setLoading(true);
-
     const fetchWords = async () => {
+      setIsFetching(true);
+      setWord2Type(["Loading....."]);
       try {
-        const response = await fetch(`https://random-word-api.herokuapp.com/word?number=${words}`);
+        const response = await fetch(`https://random-word-api.vercel.app/api?words=${words}&type=lowercase`);
         const data = await response.json();
         if (mounted) {
           // set value to type
-          setWord2Type(data.join(" "));
+          const CAPITALIZE = data[0].charAt(0).toUpperCase() + data[0].slice(1, data.length);
+          data[0] = CAPITALIZE;
+          setWord2Type(data);
+          setIsFetching(false);
         }
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching words:", error);
       }
@@ -41,12 +45,13 @@ function App() {
     return () => {
       mounted = false;
     };
-  }, [words]);
+  }, [words, resetRef]);
 
   return (
     <>
-      <h1>Have Fun Typing!</h1>
-      <div className="container hight-30">
+      {isFinish ? <Alert isFinish={isFinish} setIsFinish={setIsFinish} setResetRef={setResetRef} /> : null}
+      <div className={!isFinish ? "content" : "content filter-blur"}>
+        <h1>Have Fun Typing!</h1>
         <div className="Panel">
           <div className="wordContContainer">
             <label htmlFor="twentyFive" className="labelRadio radio-bg">
@@ -66,12 +71,17 @@ function App() {
               150
             </label>
           </div>
-          <p>WPM: {wpm.current}</p>
+          <p>WPM: {Math.round(wpm)}</p>
         </div>
-      </div>
-
-      <div className="container">
-        <Button words={words} wpm={wpm} setWord={setWords} loading={loading} word2Type={word2Type} />
+        <br />
+        <br />
+        <div className="typingSpace">
+          <TypingIndicator word2Type={word2Type} numberOfWord={words} setWpm={setWpm} isFinish={isFinish} setIsFinish={setIsFinish} resetRef={resetRef} />
+        </div>
+        <br />
+        <div className="keybaordDiv">
+          <Button words={words} wpm={wpm} setWord={setWords} isFetching={isFetching} word2Type={word2Type} />
+        </div>
       </div>
     </>
   );
